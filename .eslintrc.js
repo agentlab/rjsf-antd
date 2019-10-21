@@ -1,85 +1,118 @@
 module.exports = {
   env: {
     browser: true,
-    commonjs: true,
     es6: true,
-    node: true
+    node: true,
+    jest: true
   },
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser", // Specifies the ESLint parser
   extends: [
-    'airbnb',
-    'prettier',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
-    'plugin:prettier/recommended'
+    "plugin:react/recommended", // Uses the recommended rules from @eslint-plugin-react
+//    "plugin:import/errors",
+//    "plugin:import/warnings",
+    "plugin:@typescript-eslint/recommended", // Uses the recommended rules from @typescript-eslint/eslint-plugin
+    "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    "plugin:prettier/recommended" // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
   ],
-  parserOptions: {
-    ecmaVersion: 9,
-    ecmaFeatures: {
-      jsx: true
-    },
-    sourceType: 'module'
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly"
   },
-  plugins: ['react', 'markdown'],
+  parserOptions: {
+//    ecmaFeatures: {
+//      jsx: true
+//    },
+    ecmaVersion: 2018,
+    sourceType: "module"
+  },
+  plugins: ["import", "prettier", "react", "react-hooks"],
+  rules: {
+/*    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 120,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": true,
+        "arrowParens": "always",
+        "trailingComma": "all",
+        "jsxBracketSameLine": true,
+        "jsxSingleQuote": true,
+        "endOfLine": "lf"
+      }
+    ],*/
+    "class-methods-use-this": [
+      "warn",
+      {
+        exceptMethods: [
+          "componentDidCatch",
+          "componentDidMount",
+          "componentDidUpdate",
+          "componentWillMount",
+          "componentWillReceiveProps",
+          "componentWillUnmount",
+          "componentWillUpdate",
+          "render",
+          "shouldComponentUpdate"
+        ]
+      }
+    ],
+//    "import/no-default-export": "warn",
+//    "import/prefer-default-export": "off",
+//    "import/no-unresolved": "error", // turn on errors for missing imports
+    "@typescript-eslint/no-explicit-any": "off", // We need to delete this disable in future for full scale type-cheking
+//    "no-explicit-any": false,
+    "no-alert": "error",
+    "no-await-in-loop": "warn",
+    "no-console": "off",
+    "no-continue": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-restricted-syntax": ["off", "ForOfStatement"],
+    "no-underscore-dangle": "off",
+    "no-nested-ternary": "off",
+    "no-use-before-define": ["error", "nofunc"],
+    "guard-for-in": "off",
+    "global-require": "off",
+    "arrow-body-style": "off",
+    "prefer-template": "off",
+    "spaced-comment": "off",
+//    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "react/destructuring-assignment": "off",
+    "react/no-multi-comp": "off",
+    "react/no-array-index-key": "off",
+    "react/no-did-update-set-state": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+/*    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"]
+      }
+    ]*/
+  },
   settings: {
     react: {
-      version: 'detect'
+      version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
     },
-    'import/resolver': {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
       node: {
-        paths: ['src']
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
+        moduleDirectory: ["node_modules", "src"]
+      },
+      ts: {
+        alwaysFindTypes: true, // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
+        alwaysTryTypes: true
+      },
+      typescript: {
+        alwaysFindTypes: true, // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
+        alwaysTryTypes: true
       }
     }
-  },
-  rules: {
-    'react/jsx-one-expression-per-line': 0,
-    'react/prop-types': 0,
-    'react/forbid-prop-types': 0,
-    'react/jsx-indent': 0,
-    'react/jsx-wrap-multilines': [
-      'error',
-      { declaration: false, assignment: false }
-    ],
-    'react/jsx-filename-extension': [
-      1,
-      { extensions: ['.js', '.jsx', '.tsx', '.md'] }
-    ],
-    'jsx-a11y/no-static-element-interactions': 0,
-    'jsx-a11y/anchor-has-content': 0,
-    'jsx-a11y/click-events-have-key-events': 0,
-    'jsx-a11y/anchor-is-valid': 0,
-    'comma-dangle': ['error', 'never'],
-    indent: [
-      'error',
-      2,
-      {
-        SwitchCase: 1,
-        ignoredNodes: ['JSXAttribute', 'JSXSpreadAttribute']
-      }
-    ],
-
-    'react/jsx-first-prop-new-line': [1, 'multiline'],
-    'react/jsx-max-props-per-line': [
-      1,
-      {
-        maximum: 1
-      }
-    ],
-    'react/jsx-indent': ['error', 2],
-    'react/jsx-indent-props': ['error', 'first'],
-    '@typescript-eslint/indent': [
-      'error',
-      2,
-      {
-        ignoredNodes: ['JSXAttribute', 'JSXSpreadAttribute']
-      }
-    ],
-    '@typescript-eslint/no-explicit-any': ['off'],
-    '@typescript-eslint/explicit-function-return-type': ['off'],
-    '@typescript-eslint/explicit-member-accessibility': ['off'],
-    'import/no-unresolved': ['off'],
-    'no-underscore-dangle': ['off'],
-    'no-shadow': ['off']
   }
 };
