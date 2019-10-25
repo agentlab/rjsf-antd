@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Form, { FormProps, ObjectFieldTemplateProps } from 'react-jsonschema-form';
 import FormContext from 'antd/es/form/context';
 import { ConfigConsumer, ConfigConsumerProps } from 'antd/es/config-provider';
@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import ObjectFieldTemplateContext from '../ObjectFieldTemplate/ObjectFieldTemplateContext';
 import withTheme from '../Theme/withTheme';
 
-const FormWithTheme = withTheme(Theme);
+const FormWithTheme = withTheme<any>(Theme);
 
 type layout = 'horizontal' | 'inline' | 'vertical';
 
@@ -26,9 +26,9 @@ type FormContext = {
   };
 };
 
-export interface RjsfFormProps extends FormProps<any> {
+export interface RjsfFormProps<T> extends FormProps<T> {
   prefixCls?: string;
-  className?: string;
+  //className?: string;
   layout: layout;
   hideRequiredMark?: boolean;
   wrapperCol?: ColProps;
@@ -41,7 +41,7 @@ export interface RjsfFormProps extends FormProps<any> {
   };
 }
 
-const RjsfForm = React.forwardRef((props: RjsfFormProps, ref: React.Ref<Form<any>>) => {
+const RjsfForm = React.forwardRef((props: PropsWithChildren<RjsfFormProps<any>>, ref: React.Ref<Form<any>>) => {
   const { wrapperCol, labelAlign, labelCol, layout, colon, objectFieldTemplates = {} } = props;
 
   const renderForm = ({ getPrefixCls }: ConfigConsumerProps) => {

@@ -1,36 +1,46 @@
 {
-  "name": "rjsf-antd2min",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@craco/craco": "^5.5.0",
-    "@types/classnames": "^2.2.9",
-    "@types/jest": "^24.0.19",
-    "@types/json-schema": "^7.0.3",
-    "@types/node": "^12.7.12",
-    "@types/react": "^16.9.6",
-    "@types/react-dom": "^16.9.2",
-    "@types/react-jsonschema-form": "^1.6.5",
-    "antd": "^3.23.6",
-    "codemirror": "^5.49.0",
-    "moment": "^2.24.0",
-    "react": "^16.10.2",
-    "react-codemirror2": "^6.0.0",
-    "react-dom": "^16.10.2",
-    "react-jsonschema-form": "^1.8.0",
-    "react-scripts": "3.2.0",
-    "rimraf": "^3.0.0",
-    "typescript": "3.6.4"
+  "name": "@agentlab/rjsf-antd",
+  "version": "0.1.9",
+  "license": "MIT",
+  "description": "Ant Design theme, fields and widgets for react-jsonschema-form",
+  "bugs": {
+    "url": "https://github.com/agentlab/rjsf-antd/issues"
   },
+  "homepage": "https://github.com/agentlab/rjsf-antd#readme",
+  "author": "amivanoff",
+  "keywords": [
+    "Ant Design",
+    "react-jsonschema-form",
+    "jsonschema",
+    "json-schema",
+    "json",
+    "schema",
+    "form",
+    "react",
+    "antd",
+    "rjsf-antd"
+  ],
+  "main": "lib/index.js",
+  "types": "lib",
+  "files": [
+    "lib",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentlab/rjsf-antd.git"
+  },
+  "dependencies": {},
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf lib && tsc -p ./publish.tsconfig.json",
     "test": "react-scripts test --verbose=true",
     "test2": "react-scripts test --no-watch",
     "test-debug": "react-scripts --inspect-brk=0.0.0.0:9229 test --env=jsdom --runInBand -i",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s ./public -c .storybook",
-    "build-storybook": "build-storybook -s ./public"
+    "build-storybook": "build-storybook -s ./public",
+    "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{js,jsx,ts,tsx}\""
   },
   "browserslist": [
     ">0.2%",
@@ -38,7 +48,14 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "peerDependencies": {
+    "antd": ">=3.23.6",
+    "react": ">=16.10.2",
+    "react-jsonschema-form": ">=1.8.0"
+  },
   "devDependencies": {
+    "@types/react": "^16.9.6",
+    "@types/react-dom": "^16.9.2",
     "@storybook/addon-a11y": "^5.2.4",
     "@storybook/addon-actions": "^5.2.4",
     "@storybook/addon-backgrounds": "^5.2.4",
@@ -55,10 +72,17 @@
     "@storybook/addons": "^5.2.4",
     "@storybook/client-logger": "^5.2.4",
     "@storybook/react": "^5.2.4",
+    "@types/classnames": "^2.2.9",
+    "@types/jest": "^24.0.19",
+    "@types/json-schema": "^7.0.3",
+    "@types/node": "^12.7.12",
+    "@types/react-jsonschema-form": "^1.6.5",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
+    "antd": "^3.23.6",
     "awesome-typescript-loader": "^5.2.1",
-    "react-docgen-typescript-loader": "^3.3.0",
+    "babel-cli": "^6.26.0",
+    "codemirror": "^5.49.0",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-import-resolver-typescript": "^2.0.0",
@@ -66,8 +90,24 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.1.2",
+    "husky": "^3.0.9",
+    "moment": "^2.24.0",
+    "react-docgen-typescript-loader": "^3.3.0",
+    "react": "^16.10.2",
+    "react-codemirror2": "^6.0.0",
+    "react-dom": "^16.10.2",
+    "react-jsonschema-form": "^1.8.0",
+    "react-scripts": "3.2.0",
+    "require-context.macro": "^1.2.2",
+    "rimraf": "^3.0.0",
     "prettier": "1.18.2",
     "pretty-quick": "^2.0.0",
-    "require-context.macro": "^1.2.2"
+    "typescript": "3.6.4",
+    "webpack": "4.41.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

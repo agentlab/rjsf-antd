@@ -1,26 +1,36 @@
 import React from 'react';
 import { Select } from 'antd';
-// import { WidgetProps } from 'react-jsonschema-form';
+import { WidgetProps } from 'react-jsonschema-form';
 
-const SelectWidget: React.FC<any> = (props: any) => {
-  const { options, multiple, disabled, readonly, value, autofocus, onChange, onBlur, onFocus } = props;
+const SelectWidget: React.FC<WidgetProps> = ({
+  id,
+  options,
+  //multiple,
+  disabled,
+  readonly,
+  value,
+  autofocus,
+  onChange,
+  onBlur,
+  onFocus,
+}: WidgetProps) => {
+  const { enumOptions, enumDisabled } = options;
 
-  const { enumOptions, enumDisabled }: { enumOptions: object[]; enumDisabled: string[] } = options;
+  //let mode = multiple ? 'multiple' : 'default';
+  //mode = options.mode || mode;
 
-  let mode = multiple ? 'multiple' : 'default';
-
-  mode = options.mode || mode;
+  const mode = options.mode ? 'multiple' : 'default';
 
   const _onChange = (value: any): void => {
     onChange(value);
   };
 
   const _onBlur = (value: any): void => {
-    onBlur(value);
+    onBlur(id, value);
   };
 
   const _onFocus = () => {
-    onFocus();
+    onFocus(id, value);
   };
 
   return (
@@ -32,8 +42,8 @@ const SelectWidget: React.FC<any> = (props: any) => {
       onChange={_onChange}
       onBlur={_onBlur}
       onFocus={_onFocus}>
-      {enumOptions.map(({ value, label }: any, i: number) => {
-        const disabled: any = enumDisabled && enumDisabled.indexOf(value) !== -1;
+      {(enumOptions as any[]).map(({ value, label }: any, i: number) => {
+        const disabled: any = enumDisabled && (enumDisabled as string[]).indexOf(value) !== -1;
 
         return (
           <Select.Option key={i} value={value} disabled={disabled}>

@@ -5,13 +5,13 @@ import { RjsfFormProps } from '../Form';
 import Form from 'react-jsonschema-form';
 
 interface ThemePropsWithChildren<T> extends ThemeProps<T> {
-  children?: any;
+  children?: T;
 }
 
-function withTheme(
-  themeProps: ThemePropsWithChildren<any>,
-): React.ForwardRefExoticComponent<React.PropsWithoutRef<RjsfFormProps> & React.RefAttributes<Form<any>>> {
-  const sss = React.forwardRef(({ fields, widgets, ...directProps }: RjsfFormProps, ref: React.Ref<Form<any>>) => (
+function withTheme<T>(
+  themeProps: ThemePropsWithChildren<T>,
+): React.ForwardRefExoticComponent<React.PropsWithoutRef<RjsfFormProps<T>> & React.RefAttributes<Form<T>>> {
+  const sss = React.forwardRef(({ fields, widgets, ...directProps }: RjsfFormProps<T>, ref: React.Ref<Form<T>>) => (
     <Form
       {...themeProps}
       {...directProps}

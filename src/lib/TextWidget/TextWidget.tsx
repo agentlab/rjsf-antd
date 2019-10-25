@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
 import { WidgetProps } from 'react-jsonschema-form';
+import omit from 'omit.js';
 
 const TextWidget: React.FC<WidgetProps> = ({
   id,
@@ -27,9 +28,11 @@ const TextWidget: React.FC<WidgetProps> = ({
     onFocus(id, value);
   };
 
+  const inputOptions = omit(options, ['enumOptions']);
+
   return (
     <Input
-      {...options}
+      {...inputOptions}
       type='text'
       autoFocus={autofocus}
       required={required}

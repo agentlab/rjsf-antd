@@ -2,7 +2,10 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
+    "outDir": "lib",
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,10 +20,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react",
-    "noEmit": true
+    "jsx": "react"
   },
-  "include": ["src/**/*"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules", "build", "scripts"]
 }

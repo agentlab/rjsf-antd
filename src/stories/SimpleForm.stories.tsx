@@ -10,19 +10,20 @@ const { Header, Footer, Sider, Content } = Layout;
 
 const theme = 'light';
 
-import Form from '../lib/Form';
+import RjsfForm from '../lib/Form';
 
 storiesOf('Simple', module).add(examples.simple.title, () => (
-  <Form
+  <RjsfForm
     schema={examples.simple.schema}
     uiSchema={examples.simple.uiSchema}
     formData={examples.simple.formData}
-    onChange={(): void => {}}></Form>
+    onChange={(): void => {}}
+  />
 ));
 
 Object.entries(examples).forEach(([key, val]) =>
   storiesOf('Examples', module).add(val.title, () => (
-    <Form schema={val.schema} uiSchema={val.uiSchema} formData={val.formData} onChange={(): void => {}}></Form>
+    <RjsfForm schema={val.schema} uiSchema={val.uiSchema} formData={val.formData} onChange={(): void => {}} />
   )),
 );
 

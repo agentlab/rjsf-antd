@@ -1,7 +1,8 @@
-import { Form as AntdForm, Button } from 'antd';
 import React from 'react';
+import { Form as AntdForm, Button } from 'antd';
+import Form, { FormProps, ObjectFieldTemplateProps } from 'react-jsonschema-form';
 
-import Form from '../../lib/Form';
+import RjsfForm, { RjsfFormProps } from '../../lib/Form';
 
 const ExampleForm: React.FC<any> = ({
   schema,
@@ -12,9 +13,9 @@ const ExampleForm: React.FC<any> = ({
   onFormChanged,
   liveSettings,
   validate,
-}: any) => {
+}: RjsfFormProps & React.Ref<Form<any>>) => {
   return (
-    <Form
+    <RjsfForm
       id='example-form'
       schema={schema}
       uiSchema={uiSchema}
@@ -28,7 +29,7 @@ const ExampleForm: React.FC<any> = ({
       <Button type='primary' htmlType='submit'>
         Submit
       </Button>
-    </Form>
+    </RjsfForm>
   );
 };
 
